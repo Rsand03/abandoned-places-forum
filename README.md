@@ -1,4 +1,9 @@
-# Apandoned places forum
+# Abandoned places forum
+
+## Initial repositories
+
+- [abandoned-places-forum-FE](https://github.com/Rsand03/abandoned-places-forum-FE)
+- [abandoned-places-forum-BE](https://github.com/Rsand03/abandoned-places-forum-BE)
 
 ## Overview
 This project aims to create an interactive map that displays both public and private abandoned locations. Public places are visible to all users, while private locations are only accessible to the user who added them. Users can freely add private places, while adding public places requires a request to maintain map quality and avoid clutter. Each location can be tagged with labels like "visited" or "remember", allowing users to categorize and track their experiences. Every abandoned location will include details such as name, location, categories, condition, accessibility, and additional notes.
@@ -7,7 +12,7 @@ In the map view, users can filter visible locations by visibility (public/privat
 
 ## Status
 
-Work-in-progress. Aiming to deploy the application in march-april.
+Work in progress. Base functionality is implemented, currently working on minor extra features. Aiming to deploy the application in march-april.
 
 ## Used technologies
 
