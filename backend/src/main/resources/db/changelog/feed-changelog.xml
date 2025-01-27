@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <!-- ChangeSet for the subtopics table -->
+    <changeSet id="1" author="16-01-2025-rasand">
+        <createTable tableName="subtopics">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="subtopics" baseColumnNames="location_id"
+                                 referencedTableName="locations" referencedColumnNames="id"
+                                 constraintName="fk_subtopics_location_id"/>
+    </changeSet>
+
+    <!-- ChangeSet for the subtopic_comments table -->
+    <changeSet id="2" author="16-01-2025-rasand">
+        <createTable tableName="subtopic_comments">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="subtopic_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body" type="text"/>
+            <column name="created_by" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="subtopic_comments" baseColumnNames="subtopic_id"
+                                 referencedTableName="subtopics" referencedColumnNames="id"
+                                 constraintName="fk_subtopic_comments_subtopic_id"/>
+        <addForeignKeyConstraint baseTableName="subtopic_comments" baseColumnNames="created_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 constraintName="fk_subtopic_comments_created_by"/>
+    </changeSet>
+
+    <!-- ChangeSet for the posts table -->
+    <changeSet id="3" author="16-01-2025-rasand">
+        <createTable tableName="posts">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)"/>
+            <column name="body" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_id" type="uuid"/>
+            <column name="created_by" type="uuid">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="posts" baseColumnNames="location_id"
+                                 referencedTableName="locations" referencedColumnNames="id"
+                                 constraintName="fk_posts_location_id"/>
+        <addForeignKeyConstraint baseTableName="posts" baseColumnNames="created_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 constraintName="fk_posts_created_by"/>
+    </changeSet>
+
+    <!-- ChangeSet for the post_comments table -->
+    <changeSet id="4" author="16-01-2025-rasand">
+        <createTable tableName="post_comments">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="body" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="post_comments" baseColumnNames="post_id"
+                                 referencedTableName="posts" referencedColumnNames="id"
+                                 constraintName="fk_post_comments_post_id"/>
+        <addForeignKeyConstraint baseTableName="post_comments" baseColumnNames="created_by"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 constraintName="fk_post_comments_created_by"/>
+    </changeSet>
+
+    <!-- ChangeSet for the upvotes table -->
+    <changeSet id="5" author="16-01-2025-rasand">
+        <createTable tableName="upvotes">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="post_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="upvotes" baseColumnNames="post_id"
+                                 referencedTableName="posts" referencedColumnNames="id"
+                                 constraintName="fk_upvotes_post_id"/>
+        <addForeignKeyConstraint baseTableName="upvotes" baseColumnNames="user_id"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 constraintName="fk_upvotes_user_id"/>
+    </changeSet>
+
+</databaseChangeLog>
