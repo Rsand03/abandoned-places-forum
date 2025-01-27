@@ -7,9 +7,11 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "locations")
 public class LocationEntity {
@@ -40,20 +42,15 @@ public class LocationEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_status_id", referencedColumnName = "id")
     private LocationStatusEntity status;
-
-    @Column(name = "additional_information")
     private String additionalInformation;
-    @Column(name = "is_public")
     private boolean isPublic;
-    @Column(name = "is_pending_publication_approval")
     private boolean isPendingPublicationApproval;
-    @Column(name = "min_required_points_to_view")
     private int minRequiredPointsToView;
-
-    @Column(name = "created_by")
     private UUID createdBy;
 
     @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
+
+    @OneToMany(mappedBy = "location")
+    private Set<LocationBookmarkEntity> bookmarks;
 }

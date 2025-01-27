@@ -24,20 +24,9 @@ import { Popover, PopoverTrigger, PopoverContent } from "../../../ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "../../../../lib/utils";
 import { format } from "date-fns";
+import { Post } from "../../Feed/components/post/PostList";
 
 const apiUrl = import.meta.env.VITE_API_URL;
-
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-  locationId: string;
-  createdByUsername: string;
-  createdAt: string;
-  commentCount: number;
-  likeCount: number;
-  hasUpvoted: boolean;
-}
 
 interface PageResponse<T> {
   content: T[];
@@ -277,6 +266,15 @@ export default function UsersPostList() {
             commentCount={post.commentCount}
             likeCount={post.likeCount}
             hasUpvoted={post.hasUpvoted}
+            locationName={post.location.name}
+            lon={post.location.lon}
+            lat={post.location.lat}
+            mainCategoryName={post.location.mainCategory.name}
+            mainCategoryHex={post.location.mainCategory.colorHex}
+            subCategories={post.location.subCategories}
+            condition={post.location.condition}
+            status={post.location.status}
+            additionalInformation={post.location.additionalInformation}
           />
         ))}
       </div>

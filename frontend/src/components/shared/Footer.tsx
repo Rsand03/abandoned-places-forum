@@ -14,12 +14,6 @@ export default function Footer() {
           <h3 className="text-lg md:text-xl font-semibold">Navigation</h3>
           <div className="flex flex-col gap-y-4">
             <Link
-              to="/dashboard"
-              className="text-md text-slate-300 font-light hover:underline hover:cursor-pointer"
-            >
-              Dashboard
-            </Link>
-            <Link
               to="/feed"
               className="text-md text-slate-300 font-light hover:underline hover:cursor-pointer"
             >

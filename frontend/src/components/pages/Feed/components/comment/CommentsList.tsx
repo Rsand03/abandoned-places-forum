@@ -3,8 +3,12 @@ import { useEffect, useState, useRef } from "react";
 import Comment from "./Comment";
 
 interface CommentProps {
-  createdByUsername: string;
+  id: number;
   body: string;
+  postId: number;
+  createdById: string;
+  createdByUsername: string;
+  createdAt: string;
 }
 
 interface CommentListProps {
@@ -70,6 +74,7 @@ export default function CommentsList({ postId }: CommentListProps) {
           <Comment
             name={comment.createdByUsername}
             comment={comment.body}
+            createdAt={comment.createdAt}
             key={index}
           />
         ))

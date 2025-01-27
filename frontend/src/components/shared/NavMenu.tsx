@@ -104,13 +104,6 @@ export default function NavMenu() {
                   Urbex
                 </Link>
                 <Link
-                  to={"dashboard"}
-                  onClick={toggleMobileMenu}
-                  className="text-slate-50 hover:text-slate-100"
-                >
-                  Dashboard
-                </Link>
-                <Link
                   to={"map"}
                   onClick={toggleMobileMenu}
                   className="text-slate-50 hover:text-slate-100"
@@ -131,6 +124,13 @@ export default function NavMenu() {
                 >
                   Profile
                 </Link>
+                <Link
+                    to={"users"}
+                    onClick={toggleMobileMenu}
+                    className="text-slate-50 hover:text-slate-100"
+                >
+                  Users
+                </Link>
                 <Button
                   onClick={() => {
                     handleLogout();
@@ -148,12 +148,6 @@ export default function NavMenu() {
         <div className="hidden lg:flex gap-x-6 h-fit items-center">
           {isAuthenticated && (
             <>
-              <Link
-                to={"dashboard"}
-                className="text-blue-50 hover:text-blue-100"
-              >
-                Dashboard
-              </Link>
               <Link to={"map"} className="text-blue-50 hover:text-blue-100">
                 Map
               </Link>
@@ -162,6 +156,9 @@ export default function NavMenu() {
               </Link>
               <Link to={"profile"} className="text-blue-50 hover:text-blue-100">
                 Profile
+              </Link>
+              <Link to={"users"} className="text-blue-50 hover:text-blue-100">
+                Users
               </Link>
               <Button
                 onClick={handleLogout}

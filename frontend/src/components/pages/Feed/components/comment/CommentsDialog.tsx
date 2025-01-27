@@ -28,6 +28,7 @@ import { XIcon } from "lucide-react";
 import emitter from "../../../../../emitter/eventEmitter";
 import CommentsList from "./CommentsList";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
+import { useToast } from "../../../../../hooks/use-toast";
 
 const CommentSchema = z.object({
   comment: z.string().min(1, "Comment cannot be empty"),
@@ -47,6 +48,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export default function CommentsDialog({ postId }: CommentsDialogProps) {
   const [comments, setComments] = useState<CommentProps[]>([]);
   const [showComments, setShowComments] = useState(false);
+  const { toast } = useToast();
 
   const methods = useForm({
     resolver: zodResolver(CommentSchema),
@@ -91,11 +93,24 @@ export default function CommentsDialog({ postId }: CommentsDialogProps) {
           const commentData = await response.json();
           setComments((prevComments) => [...prevComments, commentData.body]);
           methods.reset({ comment: "" });
+          toast({
+            title: "Success!",
+            description: "Comment added.",
+          });
         } else {
           console.error("Failed to add comment");
+          const errorData = await response.json();
+          toast({
+            title: "Error!",
+            description: "Unexpected error: " + errorData.message,
+          });
         }
       } catch (error) {
         console.error("Error adding comment:", error);
+        toast({
+          title: "Error!",
+          description: "Unexpected error: " + error,
+        });
       } finally {
         emitter.emit("refreshCommentList");
         emitter.emit("refreshPostList");
@@ -109,12 +124,12 @@ export default function CommentsDialog({ postId }: CommentsDialogProps) {
       <AlertDialog>
         <AlertDialogTrigger
           onClick={() => setShowComments(!showComments)}
-          className="border-blue-600 border text-blue-600 hover:border-blue-700 hover:text-blue-700 flex px-4 py-2 rounded-sm gap-x-2 text-sm font-medium h-10 items-center"
+          className="border-blue-600 border text-blue-600 hover:border-blue-700 hover:text-blue-700 hover:bg-blue-50 flex px-4 py-2 rounded-sm gap-x-2 text-sm font-medium h-10 items-center"
         >
           Comment
           <MessageCircle className="w-4 h-4" />
         </AlertDialogTrigger>
-        <AlertDialogContent className="w-[60vw]">
+        <AlertDialogContent className="w-[60vw] bg-slate-50">
           <AlertDialogHeader>
             <div className="w-full flex justify-between">
               <AlertDialogTitle className="text-3xl">Comments</AlertDialogTitle>
@@ -122,7 +137,7 @@ export default function CommentsDialog({ postId }: CommentsDialogProps) {
                 <XIcon />
               </AlertDialogCancel>
             </div>
-            <div className="bg-slate-100 p-2 rounded-lg border border-slate-300">
+            <div className="bg-white p-2 rounded-lg border border-slate-300">
               <CommentsList postId={postId} />
             </div>
           </AlertDialogHeader>

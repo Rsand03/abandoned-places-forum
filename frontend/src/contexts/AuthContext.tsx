@@ -6,7 +6,7 @@ import {
   useEffect,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthService from "../auth/AuthService";
+import AuthService from "../service/AuthService";
 import { jwtDecode } from "jwt-decode";
 import * as jwt_decode from "jwt-decode";
 import { useToast } from "../hooks/use-toast";
@@ -76,14 +76,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("role", decoded.role);
       localStorage.setItem("points", decoded.points.toString());
 
-      navigate("/dashboard");
+      navigate("/map");
 
       toast({
-        title: "Sucess!",
+        title: "Success!",
         description: "User logged in successfully.",
       });
     } catch (error) {
-      if (error instanceof Error && "code" in error) {
+      if (error instanceof Error && "message" in error) {
         toast({
           title: "Error!",
           description: error.message || "An unknown error occurred.",
@@ -120,14 +120,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("role", decoded.role);
       localStorage.setItem("points", decoded.points.toString());
 
-      navigate("/dashboard");
+      navigate("/feed");
 
       toast({
         title: "Sucess!",
         description: "User registered successfully.",
       });
     } catch (error) {
-      if (error instanceof Error && "code" in error) {
+      if (error instanceof Error && "message" in error) {
         toast({
           title: "Error!",
           description: error.message || "An unknown error occurred.",

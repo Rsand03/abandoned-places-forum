@@ -31,7 +31,7 @@ import { format } from "date-fns";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-interface Post {
+export interface Post {
   id: number;
   title: string;
   body: string;
@@ -41,6 +41,29 @@ interface Post {
   commentCount: number;
   likeCount: number;
   hasUpvoted: boolean;
+  location: Location;
+}
+
+export interface Location {
+  id: string;
+  name: string;
+  lon: number;
+  lat: number;
+  mainCategory: MainCategory;
+  subCategories: SubCategory[];
+  condition: string;
+  status: string;
+  additionalInformation: string
+}
+
+interface MainCategory {
+  name: string;
+  colorHex: string;
+}
+
+export interface SubCategory {
+  name: string;
+  colorHex: string;
 }
 
 interface PageResponse<T> {
@@ -283,6 +306,15 @@ export default function PostList() {
             commentCount={post.commentCount}
             likeCount={post.likeCount}
             hasUpvoted={post.hasUpvoted}
+            locationName={post.location.name}
+            lon={post.location.lon}
+            lat={post.location.lat}
+            mainCategoryName={post.location.mainCategory.name}
+            mainCategoryHex={post.location.mainCategory.colorHex}
+            subCategories={post.location.subCategories}
+            condition={post.location.condition}
+            status={post.location.status}
+            additionalInformation={post.location.additionalInformation}
           />
         ))}
       </div>

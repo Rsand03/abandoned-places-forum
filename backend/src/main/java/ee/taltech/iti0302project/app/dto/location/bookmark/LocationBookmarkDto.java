@@ -1,14 +1,16 @@
 package ee.taltech.iti0302project.app.dto.location.bookmark;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
+@Builder
 @Data
+@Schema(description = "DTO for a location bookmark")
 public class LocationBookmarkDto {
-    private UUID id;
+
+    @NotNull
+    @Schema(description = "Type of location bookmark", example = "JAA_MEELDE")
     private String type;
-    private UUID locationId;
-    private LocalDateTime createdAt;
 }

@@ -109,7 +109,7 @@ export default function ProfileCard() {
           </p>
         </CardContent>
       </Card>
-      <div className="max-w-[600px] w-full mt-4">
+      <div className="w-full mt-4">
         <UsersPostList />
       </div>
     </>

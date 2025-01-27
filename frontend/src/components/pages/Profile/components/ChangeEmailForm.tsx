@@ -53,7 +53,8 @@ export default function ChangeEmailForm() {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to update email");
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
 
       toast({
@@ -61,7 +62,7 @@ export default function ChangeEmailForm() {
         description: "Email updated successfully.",
       });
     } catch (error) {
-      if (error instanceof Error && "code" in error) {
+      if (error instanceof Error && "message" in error) {
         toast({
           title: "Error!",
           description: error.message || "An unknown error occurred.",

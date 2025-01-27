@@ -7,7 +7,7 @@ export default function ProfilePage() {
   return (
     <div className="flex justify-center w-full py-8 px-2">
       <div className="max-w-[1440px] flex flex-col w-full justify-center items-center gap-y-4">
-        <Tabs defaultValue="account" className="max-w-[600px] w-full">
+        <Tabs defaultValue="account" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="account">Account</TabsTrigger>
             <TabsTrigger value="email">Email</TabsTrigger>
