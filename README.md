@@ -1,6 +1,6 @@
 # Abandoned places forum
 
-## Initial repositories
+## Original separate FE and BE repositories
 
 - [abandoned-places-forum-FE](https://github.com/Rsand03/abandoned-places-forum-FE)
 - [abandoned-places-forum-BE](https://github.com/Rsand03/abandoned-places-forum-BE)
