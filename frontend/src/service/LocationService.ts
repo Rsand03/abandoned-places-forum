@@ -48,7 +48,6 @@ const LocationService = {
 
     fetchLocationAttributes: async (toast: Function): Promise<LocationAttributes | null> => {
         try {
-            emitter.emit("startLoading");
 
             const userToken = localStorage.getItem("userToken");
             const response = await fetch(`${API_URL}/api/locations/attributes`, {
@@ -72,10 +71,7 @@ const LocationService = {
                 description: "Unexpected error: " + error.message,
             });
 
-            emitter.emit("stopLoading");
             return null;
-        } finally {
-            emitter.emit("stopLoading");
         }
     },
 

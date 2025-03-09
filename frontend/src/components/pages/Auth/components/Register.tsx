@@ -4,9 +4,12 @@ import { Button } from "../../../ui/button";
 import { Input } from "../../../ui/input";
 import { Label } from "../../../ui/label";
 import { Card, CardHeader, CardTitle } from "../../../ui/card";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 export default function Register() {
   const { register } = useAuth();
+  const {t}: { t: TFunction } = useTranslation();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,12 +30,12 @@ export default function Register() {
       <Card className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-            Register
+            {t("auth.register.title")}
           </CardTitle>
         </CardHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="username">Username</Label>
+            <Label htmlFor="username">{t("auth.register.username")}</Label>
             <Input
               type="text"
               id="username"
@@ -43,7 +46,7 @@ export default function Register() {
             />
           </div>
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t("auth.register.email")}</Label>
             <Input
               type="email"
               id="email"
@@ -54,7 +57,7 @@ export default function Register() {
             />
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">{t("auth.register.password")}</Label>
             <Input
               type="password"
               id="password"
@@ -68,7 +71,7 @@ export default function Register() {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700"
           >
-            Register
+            {t("auth.register.submit")}
           </Button>
           {error && <p className="mt-2 text-red-600">{error}</p>}
         </form>

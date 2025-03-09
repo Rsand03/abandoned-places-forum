@@ -1,5 +1,7 @@
 import Select from "react-select";
 import {EditLocationFromData, FormOption, LocationAttributesFormOptions} from "../../../../utils.ts";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 
 interface CategoriesInputProps {
@@ -14,6 +16,8 @@ function CategoriesInput({
                              locationAttributesFormOptions
                          }: CategoriesInputProps) {
 
+    const {t}: { t: TFunction } = useTranslation();
+
     function handleConditionChange(selectedOption: FormOption | null) {
         setEditLocationFormData((prevData): EditLocationFromData => ({
             ...prevData,
@@ -24,7 +28,7 @@ function CategoriesInput({
 
     return (
         <>
-            Seisukord: *
+            {t("map.sidebar.details.editing.condition")}: *
             <Select
                 options={locationAttributesFormOptions.conditions}
                 value={

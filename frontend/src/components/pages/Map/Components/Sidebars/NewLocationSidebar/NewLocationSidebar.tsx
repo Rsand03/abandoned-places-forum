@@ -20,6 +20,8 @@ import ConditionInput from "./Form/ConditionInput.tsx";
 import StatusInput from "./Form/StatusInput.tsx";
 import AutoSelectionCheckbox from "./AutoSelectionButton/AutoSelectionButton.tsx";
 import { useToast } from "../../../../../../hooks/use-toast.ts";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 interface NewLocationSidebarProps {
   globalCoordinateSelectionMode: boolean;
@@ -37,11 +39,16 @@ function NewLocationSidebar({
   globalMapClickCoords,
   displayCreatedLocation,
 }: NewLocationSidebarProps) {
+
+  const {t}: { t: TFunction } = useTranslation();
+  const { toast } = useToast();
+
   const [selectLocationAfterCreating, setSelectLocationAfterCreating] =
     useState<boolean>(true);
-  const { toast } = useToast();
+
   const [newLocationFormData, setNewLocationFormData] =
     useState<NewLocationFormData>(DEFAULT_FORM_DATA);
+
   function resetFormData() {
     setNewLocationFormData(DEFAULT_FORM_DATA);
   }
@@ -58,7 +65,7 @@ function NewLocationSidebar({
       (locationAttributes: LocationAttributes | null) => {
         if (locationAttributes) {
           setLocationAttributesFormOptions(
-            createFormOptions(locationAttributes)
+            createFormOptions(locationAttributes, t)
           );
         }
       }
@@ -93,7 +100,7 @@ function NewLocationSidebar({
   return (
     <div className="flex flex-col p-8 h-full w-full overflow-y-auto">
       <h2 className="text-2xl font-bold text-white">
-        Lisa privaatsele kaardile
+        {t("map.sidebar.new.title")}
       </h2>
       <div className="flex flex-col gap-3 text-white pt-8 rounded-lg mb-2">
         <CoordinateSelector
@@ -134,7 +141,7 @@ function NewLocationSidebar({
           onClick={createNewLocation}
           className="w-full bg-black text-white px-4 py-1 rounded border-2 border-black hover:border-white"
         >
-          Lisa
+          {t("map.sidebar.new.submit")}
         </button>
       </div>
       <div className="pt-2">

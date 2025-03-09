@@ -1,6 +1,8 @@
 import {MutableRefObject, useState} from "react";
 import VectorLayer from "ol/layer/Vector";
 import {MapLocation} from "../../utils.ts";
+import {useTranslation} from "react-i18next";
+import type {TFunction} from 'i18next';
 
 interface LocationLayerSelector {
     publicLayerRef: MutableRefObject<VectorLayer>;
@@ -15,6 +17,8 @@ function LocationLayerSelector({
                                    globalSelectedLocation,
                                    setGlobalSelectedLocation
                                }: LocationLayerSelector) {
+
+    const {t}: { t: TFunction } = useTranslation();
 
     const [displayPublicLocations, setDisplayPublicLocations] = useState(true);
     const [displayPrivateLocations, setDisplayPrivateLocations] = useState(true);
@@ -41,7 +45,7 @@ function LocationLayerSelector({
 
     return (
         <div
-            className="absolute top-24 left-4 bg-black bg-opacity-80 text-white p-2.5 rounded shadow-lg z-50"
+            className="absolute top-24 left-4 bg-black bg-opacity-80 text-white p-2.5 rounded shadow-lg z-25"
         >
             <div className="space-y-2">
                 <div className="flex items-center">
@@ -51,7 +55,7 @@ function LocationLayerSelector({
                         onChange={togglePublicLocationsVisibility}
                         className="mr-2 w-4 h-4"
                     />
-                    <label className="text-sm">Public Map</label>
+                    <label className="text-sm">{t("map.controls.displayedLocations.public")}</label>
                 </div>
                 <div className="flex items-center">
                     <input
@@ -60,7 +64,7 @@ function LocationLayerSelector({
                         onChange={togglePrivateLocationsVisibility}
                         className="mr-2 w-4 h-4"
                     />
-                    <label className="text-sm">Private Map</label>
+                    <label className="text-sm">{t("map.controls.displayedLocations.private")}</label>
                 </div>
             </div>
         </div>

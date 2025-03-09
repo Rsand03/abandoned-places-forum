@@ -1,6 +1,8 @@
 import {ChangeEvent, useRef} from "react";
 import {NewLocationFormData} from "../../../utils.ts";
 import {DEFAULT_LOCATION_NAME} from "../newLocationSidebarUtils.ts";
+import {TFunction} from "i18next";
+import {useTranslation} from "react-i18next";
 
 interface NameInputProps {
     newLocationFormData: NewLocationFormData;
@@ -8,6 +10,8 @@ interface NameInputProps {
 }
 
 function NameInput({newLocationFormData, setNewLocationFormData}: NameInputProps) {
+
+    const {t}: { t: TFunction } = useTranslation();
 
     const nameInputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
 
@@ -28,7 +32,7 @@ function NameInput({newLocationFormData, setNewLocationFormData}: NameInputProps
     return (
         <div className="">
             <label htmlFor="location-name" className="block">
-                Nimi: *
+                {t("map.sidebar.new.name")}: *
             </label>
             <input
                 type="text"

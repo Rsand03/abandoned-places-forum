@@ -6,6 +6,8 @@ import LocationService from "../../../../../../service/LocationService.ts";
 import { useEffect, useState } from "react";
 import EditSelectedLocation from "./Editing/EditSelectedLocation.tsx";
 import { useToast } from "../../../../../../hooks/use-toast.ts";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 interface LocationDetailsSidebarProps {
   globalSelectedLocation: MapLocation;
@@ -25,6 +27,9 @@ function LocationDetailsSidebar({
   displayModifiedLocation,
   setObliqueAeroPhotoCoords,
 }: LocationDetailsSidebarProps) {
+
+  const {t}: { t: TFunction } = useTranslation();
+
   const [isEditingActive, setIsEditingActive] = useState<boolean>(false);
   const cancelEditing = () => {
     setIsEditingActive(false);
@@ -87,9 +92,9 @@ function LocationDetailsSidebar({
                     />
                   )}
                   {globalSelectedLocation.isPublic ? (
-                    <div>Avalik</div>
+                    <div>{t("map.sidebar.details.public")}</div>
                   ) : (
-                    <div>Privaatne</div>
+                    <div>{t("map.sidebar.details.private")}</div>
                   )}
                 </div>
                 <div className="">
@@ -110,13 +115,13 @@ function LocationDetailsSidebar({
               <div className="absolute bottom-2 left-6">
                 <button
                     className="bg-black bg-opacity-85 text-white py-1 px-3 rounded-md opacity-60 cursor-default">
-                  Vaata postitusi (13)
+                  {t("map.sidebar.details.viewPosts")} (13)
                 </button>
               </div>
               <div className="absolute bottom-2 right-6">
                 <button
                     className="bg-black bg-opacity-85 text-white py-1 px-3 rounded-md opacity-60 cursor-default">
-                  Lisa postitus +
+                  {t("map.sidebar.details.addPost")} +
                 </button>
               </div>
             </div>
@@ -139,7 +144,7 @@ function LocationDetailsSidebar({
                   }}
                   className="flex items-center whitespace-nowrap px-3 text-md rounded-full w-min space-x-2 h-[1.9rem]"
                 >
-                  {globalSelectedLocation.mainCategory.name}
+                  {t(`location.category.${globalSelectedLocation.mainCategory.id}`)}
                 </div>
                 {globalSelectedLocation.subCategories.map(
                   (subcategory, index) => (
@@ -149,23 +154,24 @@ function LocationDetailsSidebar({
                       style={{ backgroundColor: `#${subcategory.colorHex}` }}
                       className=" px-2.5 rounded-full flex items-center h-6 text-sm"
                     >
-                      {subcategory.name}
+                      {t(`location.category.${subcategory.id}`)}
                     </div>
                   )
                 )}
               </div>
               <div className="flex flex-col pt-2">
                 <div className="flex">
-                  <p className="w-[110px] text-right  mr-4">Seisukord:</p>
-                  <p>{globalSelectedLocation.condition}</p>
+                  <p className="w-[110px] text-right  mr-4">{t("map.sidebar.details.condition")}:</p>
+                  <p>{t(`location.condition.${globalSelectedLocation.condition.id}`)}</p>
                 </div>
                 <div className="flex pt-1">
-                  <p className="w-[110px] text-right mr-4">Ligipääsetavus:</p>
-                  <p>{globalSelectedLocation.status}</p>
+                  <p className="w-[110px] text-right mr-4">{t("map.sidebar.details.status")}:</p>
+                  <p>{t(`location.status.${globalSelectedLocation.status.id}`)}
+                  </p>
                 </div>
                 <div className="flex flex-row pt-6">
                   <p className="w-[110px] text-right mr-3 whitespace-nowrap pt-1">
-                    Muu info:
+                    {t("map.sidebar.details.additionalInfo")}:
                   </p>
                   <p
                     style={{
@@ -185,10 +191,10 @@ function LocationDetailsSidebar({
               </div>
               <div className="flex items-center gap-3 mb-4 pt-3">
                 <button
-                  className="bg-green-700 text-white py-2 px-3 rounded-sm shadow-md hover:bg-green-600 transition-all flex items-center space-x-2 h-7"
+                  className="bg-green-700 text-white py-2 px-3 rounded-sm shadow-md hover:bg-green-600 transition-all flex items-center space-x-1 h-7"
                   onClick={showLocationObliqueAeroPhoto}
                 >
-                  Kaldaerofoto
+                  {t("map.sidebar.details.obliqueAerophoto")}
                 </button>
                 <LandBoardButton location={globalSelectedLocation} />
                 <div className="pl-3">
@@ -199,7 +205,7 @@ function LocationDetailsSidebar({
                         setIsEditingActive(true);
                       }}
                     >
-                      <div>Muuda</div>
+                      <div>{t("map.sidebar.details.edit")}</div>
                       <img
                         src="https://img.icons8.com/?size=100&id=86376&format=png&color=FFFFFF"
                         className="w-4 h-4"
@@ -214,7 +220,7 @@ function LocationDetailsSidebar({
                       className="bg-red-700 w-min py-1 px-2 h-6 rounded-sm shadow-md hover:bg-red-600 transition-all flex items-center space-x-2"
                       onClick={deleteSelectedLocation}
                     >
-                      Kustuta
+                      {t("map.sidebar.details.delete")}
                     </button>
                   )}
                 </div>

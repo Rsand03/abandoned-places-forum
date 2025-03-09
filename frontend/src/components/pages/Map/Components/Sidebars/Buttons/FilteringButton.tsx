@@ -1,14 +1,18 @@
 import {SidebarContent} from "../../utils.ts";
 import {SIDEBAR_TRANSITION_DURATION} from "../../../MapPage.tsx";
+import {useIsMobile} from "../../../../../../hooks/use-mobile.tsx";
 
 interface FilteringButtonProps {
     sidebarContent: SidebarContent;
     isSidebarOpen: boolean;
     manageSidebar: (newContent: SidebarContent) => void;
-
+    globalCoordinateSelectionMode: boolean;
 }
 
-function FilteringButton({ sidebarContent, isSidebarOpen, manageSidebar }: FilteringButtonProps) {
+function FilteringButton({ sidebarContent, isSidebarOpen, manageSidebar, globalCoordinateSelectionMode }: FilteringButtonProps) {
+
+    const isMobile = useIsMobile();
+
     return (
         <button
             onClick={() => manageSidebar(SidebarContent.FILTER)}
@@ -18,7 +22,7 @@ function FilteringButton({ sidebarContent, isSidebarOpen, manageSidebar }: Filte
                  rounded-l-lg transition-transform ease-in-out"
                 style={{
                     backgroundColor: sidebarContent === SidebarContent.FILTER ? "rgba(256, 256, 256, 0.7)" : "rgba(0, 0, 0, 0.75)",
-                    transform: isSidebarOpen ? "translateX(-500px)" : "translateX(0)",
+                    transform: isSidebarOpen && !(globalCoordinateSelectionMode && isMobile) ? "translateX(-500px)" : "translateX(0)",
                     transitionDuration: `${SIDEBAR_TRANSITION_DURATION}ms`,
                 }}
             >

@@ -1,17 +1,24 @@
 import {useEffect, useState} from "react";
+import {TFunction} from "i18next";
+import {useTranslation} from "react-i18next";
 
-const bookmarkTypes = [
-  { type: "JAA_MEELDE", label: "Jäta meelde" },
-  { type: "JUBA_KULASTATUD", label: "Juba külastatud" },
-  { type: "SUUR_RISK", label: "Suur risk" },
-  { type: "OSALISELT_AVASTATUD", label: "Osaliselt avastatud" },
-];
+
 
 export default function LocationBookmarks({
   locationId,
 }: {
   locationId: string;
 }) {
+
+  const {t}: { t: TFunction } = useTranslation();
+
+  const bookmarkTypes = [
+    { type: "JAA_MEELDE", label: t("location.temporaryBookmark.remember") },
+    { type: "JUBA_KULASTATUD", label: t("location.temporaryBookmark.alreadyVisited") },
+    { type: "SUUR_RISK", label: "Suur risk" },
+    { type: "OSALISELT_AVASTATUD", label: "Osaliselt avastatud" },
+  ];
+
   const [selectedBookmarks, setSelectedBookmarks] = useState<string[]>([]);
 
   // Get userId from localStorage
@@ -117,7 +124,7 @@ export default function LocationBookmarks({
 
   return (
     <div className="absolute top-24 left-6 bg-black bg-opacity-75 rounded-lg p-1.5 pl-2">
-      {bookmarkTypes.map(({ type, label }) => (
+      {bookmarkTypes.slice(0, 2).map(({ type, label }) => (
         <div className="flex items-center" key={type}>
           <input
             type="checkbox"

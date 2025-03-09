@@ -25,7 +25,7 @@ module.exports = {
   			}
   		},
 		cursor: {
-			'map-pin': `url(https://img.icons8.com/?size=24&id=7880&format=png&color=2196f3) 12 20, auto`,
+			'map-pin': `url(https://img.icons8.com/?size=24&id=7880&format=png&color=2196f3) 12 24, auto`,
 		},
   	}
   },

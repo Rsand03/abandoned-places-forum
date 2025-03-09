@@ -13,6 +13,8 @@ import {
 import { Input } from "../../../../../ui/input";
 import { Label } from "../../../../../ui/label";
 import { MapLocation } from "../../utils";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -26,8 +28,10 @@ interface ConfirmPublishingDialogProps {
 }
 
 export default function ConfirmPublishingDialog({ globalSelectedLocation, stopDisplayingLocation, displayModifiedLocation }: ConfirmPublishingDialogProps) {
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
+  const {t}: { t: TFunction } = useTranslation();
+
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [points, setPoints] = useState<number>(0);
 
   const publishLocation = async (locationId: string, minRequiredPointsToView: number) => {
@@ -74,19 +78,19 @@ export default function ConfirmPublishingDialog({ globalSelectedLocation, stopDi
   return (
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">Avalikusta</Button>
+        <Button className="bg-blue-600 hover:bg-blue-700">{t("map.sidebar.details.publish")}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Insert Points</DialogTitle>
+          <DialogTitle>{t("map.sidebar.details.publishPopup.title")}</DialogTitle>
           <DialogDescription>
-            Insert the number of points required for other users to see your Public Location.
+            {t("map.sidebar.details.publishPopup.description")}
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="points" className="text-right">
-              Points
+              {t("map.sidebar.details.publishPopup.points")}
             </Label>
             <Input
               id="points"
@@ -112,7 +116,7 @@ export default function ConfirmPublishingDialog({ globalSelectedLocation, stopDi
               }
             }}
           >
-            Publish Location
+            {t("map.sidebar.details.publishPopup.submit")}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,6 +1,8 @@
 import {ChangeEvent, useRef} from "react";
 import {EditLocationFromData} from "../../../../utils.ts";
 import {DEFAULT_LOCATION_NAME} from "../../../NewLocationSidebar/newLocationSidebarUtils.ts";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 interface NameInputProps {
     editLocationFormData: EditLocationFromData;
@@ -9,6 +11,7 @@ interface NameInputProps {
 
 function NameInput({editLocationFormData, setEditLocationFormData}: NameInputProps) {
 
+    const {t}: { t: TFunction } = useTranslation();
     const nameInputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
 
     function autoSelectWholeName(){
@@ -28,7 +31,7 @@ function NameInput({editLocationFormData, setEditLocationFormData}: NameInputPro
     return (
         <div className="">
             <label htmlFor="location-name" className="block">
-                Nimi: *
+                {t("map.sidebar.details.editing.name")}: *
             </label>
             <input
                 type="text"

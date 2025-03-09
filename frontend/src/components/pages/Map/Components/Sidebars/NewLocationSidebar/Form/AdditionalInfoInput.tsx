@@ -1,5 +1,7 @@
 import {ChangeEvent} from "react";
 import {NewLocationFormData} from "../../../utils.ts";
+import {TFunction} from "i18next";
+import {useTranslation} from "react-i18next";
 
 interface LocationNameFieldProps {
     newLocationFormData: NewLocationFormData;
@@ -7,6 +9,8 @@ interface LocationNameFieldProps {
 }
 
 function AdditionalInformationInput({newLocationFormData, setNewLocationFormData}: LocationNameFieldProps) {
+
+    const {t}: { t: TFunction } = useTranslation();
 
     function updateFormData(event: ChangeEvent<HTMLTextAreaElement>)  {
         setNewLocationFormData((prevData): NewLocationFormData => ({
@@ -18,7 +22,8 @@ function AdditionalInformationInput({newLocationFormData, setNewLocationFormData
     return (
         <div className="mb-3">
             <label htmlFor="additionalInformation" className="block">
-                Lisainfo:
+                {t("map.sidebar.new.additionalInfo")}:
+
             </label>
             <textarea
                 name="additionalInformation"

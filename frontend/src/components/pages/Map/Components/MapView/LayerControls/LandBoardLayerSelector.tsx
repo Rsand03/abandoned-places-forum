@@ -1,29 +1,33 @@
 import {MutableRefObject, useState} from "react";
 import {createLandBoardTileMapSource, LandBoardLayerTypes} from "../mapLayers";
 import TileLayer from "ol/layer/Tile";
+import type {TFunction} from "i18next";
+import {useTranslation} from "react-i18next";
 
 interface LandBoardLayerSelectorProps {
-    landBoardLayerRef1: MutableRefObject<TileLayer>;
-    landBoardLayerRef2: MutableRefObject<TileLayer>;
+    landBoardBaseLayer: MutableRefObject<TileLayer>;
+    landBoardOverlayLayer: MutableRefObject<TileLayer>;
 }
 
-function LandBoardLayerSelector({ landBoardLayerRef1, landBoardLayerRef2 }: LandBoardLayerSelectorProps) {
+function LandBoardLayerSelector({ landBoardBaseLayer, landBoardOverlayLayer }: LandBoardLayerSelectorProps) {
+
+    const {t}: { t: TFunction } = useTranslation();
 
     const [activeLayer, setActiveLayer] = useState<LandBoardLayerTypes | null>(null);
 
     function handleLayerChange(layerType: LandBoardLayerTypes | null) {
-        landBoardLayerRef1.current.clearRenderer();
-        landBoardLayerRef1.current.setSource(null);
-        landBoardLayerRef2.current.clearRenderer();
-        landBoardLayerRef2.current.setSource(null);
+        landBoardBaseLayer.current.clearRenderer();
+        landBoardBaseLayer.current.setSource(null);
+        landBoardOverlayLayer.current.clearRenderer();
+        landBoardOverlayLayer.current.setSource(null);
         setActiveLayer(null);
 
         if (layerType !== activeLayer && layerType === LandBoardLayerTypes.HYBRID) {
-            landBoardLayerRef1.current.setSource(createLandBoardTileMapSource(LandBoardLayerTypes.ORTOPHOTO));
-            landBoardLayerRef2.current.setSource(createLandBoardTileMapSource(LandBoardLayerTypes.HYBRID));
+            landBoardBaseLayer.current.setSource(createLandBoardTileMapSource(LandBoardLayerTypes.ORTOPHOTO));
+            landBoardOverlayLayer.current.setSource(createLandBoardTileMapSource(LandBoardLayerTypes.HYBRID, "png"));
             setActiveLayer(LandBoardLayerTypes.HYBRID);
         } else if (layerType !== activeLayer && layerType !== null) {
-            landBoardLayerRef1.current.setSource(createLandBoardTileMapSource(layerType));
+            landBoardBaseLayer.current.setSource(createLandBoardTileMapSource(layerType));
             setActiveLayer(layerType);
         }
     }
@@ -34,19 +38,19 @@ function LandBoardLayerSelector({ landBoardLayerRef1, landBoardLayerRef2 }: Land
                 className={`px-4 py-2 rounded-lg text-white ${activeLayer === null ? "bg-blue-500" : "bg-gray-800"}`}
                 onClick={() => handleLayerChange(null)}
             >
-                {"BASE MAP ONLY"}
+                {t("map.layers.default")}
             </button>
             {Object.keys(LandBoardLayerTypes).map((key) => {
                 const layerType = LandBoardLayerTypes[key as keyof typeof LandBoardLayerTypes];
                 return (
                     <button
                         key={layerType}
-                        className={`px-4 py-2 rounded-lg text-white ${
+                        className={`px-4 py-2 rounded-lg text-white min-w-36 ${
                             activeLayer === layerType ? "bg-blue-500" : "bg-gray-800"
                         }`}
                         onClick={() => handleLayerChange(layerType)}
                     >
-                        {key}
+                        {t(`map.layers.${key}`)}
                     </button>
                 );
             })}

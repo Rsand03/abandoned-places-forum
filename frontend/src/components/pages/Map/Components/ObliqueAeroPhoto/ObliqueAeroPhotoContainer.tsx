@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {useIsMobile} from "../../../../../hooks/use-mobile.tsx";
 
 interface ObliqueAeroPhotoContainerProps {
   obliqueAeroPhotoCoords: number[] | null;
@@ -9,6 +10,8 @@ function ObliqueAeroPhotoContainer({
   obliqueAeroPhotoCoords,
   isSidebarOpen,
 }: ObliqueAeroPhotoContainerProps) {
+
+  const isMobile = useIsMobile();
   const [iframeUrl, setIframeUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,12 +30,12 @@ function ObliqueAeroPhotoContainer({
         <div
           className="absolute p-0.5 bg-white rounded-lg z-50"
           style={{
-            width: isSidebarOpen ? "50vw" : "70vw",
+            width: !isMobile ? isSidebarOpen ? "50vw" : "70vw" : "90vw",
             height: "75vh",
             boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
             border: "10px solid #fff",
             top: "50%",
-            left: isSidebarOpen ? "calc(50% - 300px)" : "50%",
+            left: isSidebarOpen && !isMobile ? "calc(50% - 300px)" : "50%",
             transform: "translate(-50%, -50%)",
             transition: "width 0.5s ease, left 0.5s ease",
           }}

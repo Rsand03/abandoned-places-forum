@@ -272,8 +272,8 @@ export default function UsersPostList() {
             mainCategoryName={post.location.mainCategory.name}
             mainCategoryHex={post.location.mainCategory.colorHex}
             subCategories={post.location.subCategories}
-            condition={post.location.condition}
-            status={post.location.status}
+            condition={post.location.condition.name}
+            status={post.location.status.name}
             additionalInformation={post.location.additionalInformation}
           />
         ))}

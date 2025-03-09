@@ -9,10 +9,13 @@ import FilteringButton from "./Components/Sidebars/Buttons/FilteringButton.tsx";
 import {MapLocation, SidebarContent} from "./Components/utils.ts";
 import LocationService from "../../../service/LocationService.ts";
 import { useToast } from "../../../hooks/use-toast.ts";
+import {useIsMobile} from "../../../hooks/use-mobile.tsx";
 
 export const SIDEBAR_TRANSITION_DURATION = 300;
 
 function MapPage() {
+    const isMobile = useIsMobile();
+
   const [globalSelectedLocation, setGlobalSelectedLocation] =
     useState<MapLocation | null>(null);
 
@@ -104,9 +107,9 @@ function MapPage() {
       />
       <div
         className="fixed top-0 right-0 h-full bg-black bg-opacity-75 z-40
-                 flex justify-center items-center transition-all ease-in-out w-[500px]"
+                 flex justify-center items-center transition-all ease-in-out w-[500px] max-w-full"
         style={{
-          transform: isSidebarOpen ? "translateX(0)" : "translateX(100%)",
+          transform: isSidebarOpen && !(globalCoordinateSelectionMode && isMobile) ? "translateX(0)" : "translateX(100%)",
           transitionDuration: `${SIDEBAR_TRANSITION_DURATION}ms`,
         }}
       >
@@ -142,11 +145,13 @@ function MapPage() {
         sidebarContent={sidebarContent}
         isSidebarOpen={isSidebarOpen}
         manageSidebar={manageSidebar}
+        globalCoordinateSelectionMode={globalCoordinateSelectionMode}
       />
       <FilteringButton
         sidebarContent={sidebarContent}
         isSidebarOpen={isSidebarOpen}
         manageSidebar={manageSidebar}
+        globalCoordinateSelectionMode={globalCoordinateSelectionMode}
       />
     </div>
   );

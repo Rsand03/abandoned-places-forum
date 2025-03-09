@@ -1,5 +1,7 @@
 import Select, {MultiValue} from "react-select";
 import {EditLocationFromData, FormOption, LocationAttributesFormOptions} from "../../../../utils.ts";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 
 interface CategoriesInputProps {
@@ -13,6 +15,8 @@ function CategoriesInput({
                              setEditLocationFormData,
                              locationAttributesFormOptions
                          }: CategoriesInputProps) {
+
+    const {t}: { t: TFunction } = useTranslation();
 
     function handleMainCategoryChange(selectedOption: FormOption | null) {
         setEditLocationFormData((prevData): EditLocationFromData => ({
@@ -42,7 +46,7 @@ function CategoriesInput({
 
     return (
         <>
-            Põhikategooria: *
+            {t("map.sidebar.details.editing.mainCategory")}: *
             <Select
                 options={locationAttributesFormOptions.categories}
                 value={
@@ -55,7 +59,7 @@ function CategoriesInput({
                 placeholder="-"
                 isClearable
             />
-            Alamkategooriad (max 5):
+            {t("map.sidebar.details.editing.subCategories")} (max 5):
             <Select
                 options={
                     locationAttributesFormOptions.categories

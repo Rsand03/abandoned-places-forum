@@ -1,8 +1,8 @@
 import Map from "ol/Map.js";
-import { defaults as defaultInteractions, Select } from "ol/interaction";
-import { Feature, MapBrowserEvent } from "ol";
-import { MutableRefObject, useEffect, useRef } from "react";
-import { toLonLat } from "ol/proj";
+import {defaults as defaultInteractions, Select} from "ol/interaction";
+import {Feature, MapBrowserEvent} from "ol";
+import {MutableRefObject, useEffect, useRef} from "react";
+import {toLonLat} from "ol/proj";
 import VectorSource from "ol/source/Vector";
 import {
   DEFAULT_INITIAL_VIEW,
@@ -10,21 +10,14 @@ import {
   generateLocationFeature,
   generateLocationInProgressFeature,
   generateSelectedFeature,
-  L_EST,
 } from "./mapUtils.ts";
-import { MapLocation, SidebarContent } from "../utils.ts";
-import {
-  BASE_OSM_LAYER,
-  createNewInProgressLocationLayer,
-  createVectorLayer,
-} from "./mapLayers.ts";
+import {MapLocation, SidebarContent} from "../utils.ts";
+import {BASE_OSM_LAYER, createNewInProgressLocationLayer, createVectorLayer,} from "./mapLayers.ts";
 import VectorLayer from "ol/layer/Vector";
-import { SelectEvent } from "ol/interaction/Select";
+import {SelectEvent} from "ol/interaction/Select";
 import LocationLayerSelector from "./LayerControls/LocationLayerSelector.tsx";
-import proj4 from "proj4";
-import { register } from "ol/proj/proj4";
-import TileLayer from "ol/layer/Tile";
 import LandBoardLayerSelector from "./LayerControls/LandBoardLayerSelector.tsx";
+import TileLayer from "ol/layer/Tile";
 
 interface MapViewProps {
   globalMapClickCoords: number[] | null;
@@ -38,12 +31,6 @@ interface MapViewProps {
   locationsDisplayedOnMap: MapLocation[];
   sideBarContent: SidebarContent;
 }
-
-proj4.defs(
-  L_EST,
-  "+proj=lcc +lat_1=59.33333333333334 +lat_2=58 +lat_0=57.51755393055556 +lon_0=24 +x_0=500000 +y_0=6375000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
-);
-register(proj4);
 
 function MapView({
   globalMapClickCoords,
@@ -83,16 +70,13 @@ function MapView({
   const selectedLocationsVectorLayer: MutableRefObject<VectorLayer> = useRef(
     createVectorLayer(selectedLocationsVectorSource.current)
   );
-  const landBoardTileLayer1: MutableRefObject<TileLayer> = useRef(new TileLayer());
-  const landBoardTileLayer2: MutableRefObject<TileLayer> = useRef(new TileLayer());
+  const landBoardBaseLayer: MutableRefObject<TileLayer> = useRef(new TileLayer());
+  const landBoardOverlayLayer: MutableRefObject<TileLayer> = useRef(new TileLayer());
 
   function handleSelectEvent(event: SelectEvent) {
     const selectedFeatures: Feature[] = event.selected;
 
-    if (
-      selectedFeatures.length &&
-      !selectedFeatures[0]?.get("isNewLocationInProgress")
-    ) {
+    if (selectedFeatures.length && !selectedFeatures[0]?.get("isNewLocationInProgress")) {
       setGlobalSelectedLocation(selectedFeatures[0].get("location"));
     } else {
       setGlobalSelectedLocation(null);
@@ -104,8 +88,8 @@ function MapView({
       target: "map-container",
       layers: [
         BASE_OSM_LAYER,
-        landBoardTileLayer1.current,
-        landBoardTileLayer2.current,
+        landBoardBaseLayer.current,
+        landBoardOverlayLayer.current,
         privateLocationsLayer.current,
         publicLocationsLayer.current,
         selectedLocationsVectorLayer.current,
@@ -200,8 +184,8 @@ function MapView({
         setGlobalSelectedLocation={setGlobalSelectedLocation}
       />
       <LandBoardLayerSelector
-          landBoardLayerRef1={landBoardTileLayer1}
-          landBoardLayerRef2={landBoardTileLayer2}
+          landBoardBaseLayer={landBoardBaseLayer}
+          landBoardOverlayLayer={landBoardOverlayLayer}
       />
     </div>
   );

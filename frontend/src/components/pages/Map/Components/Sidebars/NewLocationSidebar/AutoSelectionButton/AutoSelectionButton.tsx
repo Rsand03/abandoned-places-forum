@@ -1,3 +1,6 @@
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
+
 interface CategoriesInputProps {
     selectLocationAfterCreating: boolean;
     setSelectLocationAfterCreating: (newState: boolean) => void;
@@ -5,6 +8,8 @@ interface CategoriesInputProps {
 
 
 function AutoSelectionButton({selectLocationAfterCreating, setSelectLocationAfterCreating}: CategoriesInputProps) {
+
+    const {t}: { t: TFunction } = useTranslation();
 
     const toggleSelectingState = () => {
         setSelectLocationAfterCreating(!selectLocationAfterCreating);
@@ -19,7 +24,7 @@ function AutoSelectionButton({selectLocationAfterCreating, setSelectLocationAfte
                 style={{accentColor: "black"}}
             />
             <div className="pl-2 text-[0.7rem] text-white">
-                Kuva peale lisamist detailvaade
+                {t("map.sidebar.new.detailsView")}
             </div>
         </div>
     );

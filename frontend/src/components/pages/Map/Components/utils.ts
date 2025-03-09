@@ -14,8 +14,8 @@ export interface MapLocation {
     lat: number;
     mainCategory: LocationCategory;
     subCategories: LocationCategory[];
-    condition: string;
-    status: string;
+    condition: LocationCondition;
+    status: LocationStatus;
     additionalInformation: string;
     minRequiredPointsToView: number;
     isPublic: boolean;

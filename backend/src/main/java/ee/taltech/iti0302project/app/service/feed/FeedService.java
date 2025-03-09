@@ -19,6 +19,7 @@ import ee.taltech.iti0302project.app.repository.location.LocationRepository;
 import ee.taltech.iti0302project.app.specifications.PostSpecifications;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,5 @@
-import {FormOption, LocationAttributes, NewLocationFormData} from "../../utils.ts";
+import {FormOption, LocationAttributes, LocationAttributesFormOptions, NewLocationFormData} from "../../utils.ts";
+import {TFunction} from "i18next";
 
 
 export const DEFAULT_LOCATION_NAME = "Asukoht_1";
@@ -19,17 +20,17 @@ export const DEFAULT_FORM_DATA: NewLocationFormData = {
 };
 
 
-export const createFormOptions = (data: LocationAttributes) => ({
+export const createFormOptions = (data: LocationAttributes, t: TFunction): LocationAttributesFormOptions => ({
     categories: data.categories.map((category): FormOption => ({
         value: category.id,
-        label: category.name
+        label: t(`location.category.${category.id}`)
     })),
     conditions: data.conditions.map((condition): FormOption => ({
         value: condition.id,
-        label: condition.name
+        label: t(`location.condition.${condition.id}`)
     })),
     statuses: data.statuses.map((status): FormOption => ({
         value: status.id,
-        label: status.name
+        label: t(`location.status.${status.id}`)
     }))
 });

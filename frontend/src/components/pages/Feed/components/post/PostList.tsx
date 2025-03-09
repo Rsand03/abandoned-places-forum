@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import PostCard from "./PostCard";
 import emitter from "../../../../../emitter/eventEmitter";
 import {
@@ -10,24 +10,14 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "../../../../ui/pagination";
-import { Input } from "../../../../ui/input";
-import { Button } from "../../../../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../../../ui/select";
-import { Calendar } from "../../../../ui/calendar";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "../../../../ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "../../../../../lib/utils";
-import { format } from "date-fns";
+import {Input} from "../../../../ui/input";
+import {Button} from "../../../../ui/button";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "../../../../ui/select";
+import {Calendar} from "../../../../ui/calendar";
+import {Popover, PopoverContent, PopoverTrigger,} from "../../../../ui/popover";
+import {CalendarIcon} from "lucide-react";
+import {cn} from "../../../../../lib/utils";
+import {format} from "date-fns";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -51,8 +41,8 @@ export interface Location {
   lat: number;
   mainCategory: MainCategory;
   subCategories: SubCategory[];
-  condition: string;
-  status: string;
+  condition: LocationCondition;
+  status: LocationStatus;
   additionalInformation: string
 }
 
@@ -62,6 +52,18 @@ interface MainCategory {
 }
 
 export interface SubCategory {
+  name: string;
+  colorHex: string;
+}
+
+export interface LocationCondition {
+  id: number;
+  name: string;
+  colorHex: string;
+}
+
+export interface LocationStatus {
+  id: number;
   name: string;
   colorHex: string;
 }
@@ -312,8 +314,8 @@ export default function PostList() {
             mainCategoryName={post.location.mainCategory.name}
             mainCategoryHex={post.location.mainCategory.colorHex}
             subCategories={post.location.subCategories}
-            condition={post.location.condition}
-            status={post.location.status}
+            condition={post.location.condition.name}
+            status={post.location.status.name}
             additionalInformation={post.location.additionalInformation}
           />
         ))}

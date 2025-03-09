@@ -1,5 +1,7 @@
 import {NewLocationFormData} from "../../../utils.ts";
 import {useEffect} from "react";
+import {useTranslation} from "react-i18next";
+import {TFunction} from "i18next";
 
 interface CoordinateSelectorProps {
     globalCoordinateSelectionMode: boolean;
@@ -16,6 +18,8 @@ function CoordinateSelector({
                                 newLocationFormData,
                                 setNewLocationFormData,
                             }: CoordinateSelectorProps) {
+
+    const {t}: { t: TFunction } = useTranslation();
 
     function toggleCoordinateSelectionMode() {
         setGlobalCoordinateSelectionMode(!globalCoordinateSelectionMode)
@@ -36,7 +40,7 @@ function CoordinateSelector({
 
     return (
         <div className="flex flex-col gap-2">
-            <span>Koordinaadid: *</span>
+            <span>{`${t("map.sidebar.new.coordinates")}: *`}</span>
             <div className="flex items-center gap-x-8">
                 <span>
                     {newLocationFormData.lon
@@ -56,7 +60,7 @@ function CoordinateSelector({
                         : "border-black"}`
                     }
                 >
-                    <span>Määra kaardil</span>
+                    <span>{t("map.sidebar.new.selectOnMap")}</span>
                     <img
                         src="https://img.icons8.com/?size=100&id=85353&format=png&color=FFFFFF"
                         className="w-5 h-5 ml-1 transition-none"

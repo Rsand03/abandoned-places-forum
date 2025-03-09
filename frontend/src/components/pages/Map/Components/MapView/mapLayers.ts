@@ -5,8 +5,8 @@ import TileLayer from "ol/layer/Tile";
 import {ImageWMS, OSM, XYZ} from "ol/source";
 import {TileGrid} from "ol/tilegrid";
 import {L_EST} from "./mapUtils.ts";
-import {Image} from "ol/layer";
 import {ImageTile, Tile} from "ol";
+import ImageLayer from "ol/layer/Image";
 
 export enum LandBoardLayerTypes {
     ORTOPHOTO = "foto",
@@ -34,23 +34,7 @@ export const createNewInProgressLocationLayer = (source: VectorSource) =>
     });
 
 
-export const createImageLayer = () => {
-    new Image({
-        source: new ImageWMS({
-            url: 'https://kaart.maaamet.ee/wms/alus?',
-            params: {
-                LAYERS: 'MA-ALUS',
-                VERSION: '1.1.1',
-                FORMAT: 'image/png',
-                TRANSPARENT: true,
-                SRS: L_EST,
-            },
-        }),
-    })
-};
-
-
-export const createLandBoardTileMapSource = (mapType: LandBoardLayerTypes) => {
+export const createLandBoardTileMapSource = (mapType: LandBoardLayerTypes, tileFormat: string = "jpg") => {
     return new XYZ({
         projection: L_EST,
         tileGrid: new TileGrid({
@@ -58,13 +42,14 @@ export const createLandBoardTileMapSource = (mapType: LandBoardLayerTypes) => {
             minZoom: 3,
             resolutions: [
                 4000, 2000, 1000, 500, 250, 125, 62.5, 31.25, 15.625, 7.8125,
-                3.90625, 1.953125, 0.9765625, 0.48828125,
+                3.90625, 1.953125, 0.9765625, 0.48828125, 0.244140625,
             ],
         }),
-        url: `https://tiles.maaamet.ee/tm/tms/1.0.0/${mapType}/{z}/{x}/{-y}.jpg`,
+        url: `https://tiles.maaamet.ee/tm/tms/1.0.0/${mapType}/{z}/{x}/{-y}.${tileFormat}`,
         tileLoadFunction: removeWhiteBordersHack,
     });
 };
+
 
 function removeWhiteBordersHack(tile: Tile, src: string) {
     const imageTile = tile as ImageTile;
@@ -90,3 +75,44 @@ function removeWhiteBordersHack(tile: Tile, src: string) {
     }
     image.src = src;
 }
+
+
+// this WMS would probably violate Estonian Land Board API terms of service, a TMS should be used instead if possible
+export const createImageLayer = () => {
+    return new ImageLayer({
+        source: new ImageWMS({
+            url: 'https://xgis.maaamet.ee/xgis2/service/r979dl',
+            params: {
+                REQUEST: 'GetMap',
+                SERVICE: 'WMS',
+                LAYERS: 'EESTIFOTO',
+                VERSION: '1.1.1',
+                FORMAT: 'image/jpeg', // Use JPEG format as in the example
+                STYLES: '',
+                TRANSPARENT: true,
+            },
+            projection: 'EPSG:3301', // Use EPSG:3301 projection
+            ratio: 1, // Prevent blurry images (adjust as needed)
+        }),
+    });
+};
+
+
+// this WMS would probably violate Estonian Land Board API terms of service, a TMS should be used instead if possible
+export const createLandBoardWmsSource = () => {
+    return new ImageWMS({
+        url: 'https://xgis.maaamet.ee/xgis2/service/1gj4lm9',
+        params: {
+            REQUEST: 'GetMap',
+            SERVICE: 'WMS',
+            VERSION: '1.1.1',
+            FORMAT: 'image/jpeg',
+            STYLES: '',
+            TRANSPARENT: true,
+            LAYERS: 'EESTIFOTO',
+            SRS: 'EPSG:3301',
+        },
+        serverType: 'geoserver',
+        projection: L_EST,
+    });
+};
