@@ -14,7 +14,7 @@ In the map view, users can filter visible locations by visibility (public/privat
 
 ## Status
 
-Work in progress. Base functionality is implemented, currently working on minor extra features. Aiming to deploy the application in march-april.
+Work in progress. Base functionality is implemented, currently working on minor extra features. Aiming to deploy the application in April/May.
 
 ## Used technologies
 
