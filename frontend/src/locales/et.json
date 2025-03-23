@@ -1,0 +1,141 @@
+{
+  "welcome": "Welcome to our app",
+  "auth": {
+    "registerText": "Loo uus kasutaja",
+    "loginText": "Logi sisse olemasoleva kasutajaga",
+    "login": {
+      "title": "Logi sisse",
+      "username": "Kasutajanimi",
+      "password": "Parool",
+      "submit": "Logi sisse",
+      "loginAsTestUser": "Logi sisse testkasutajana"
+    },
+    "register": {
+      "title": "Loo kasutaja",
+      "username": "Kasutajanimi",
+      "password": "Parool",
+      "email": "E-mail",
+      "submit": "Loo kasutaja"
+    }
+  },
+  "navMenu": {
+    "testEnvironment": "NB! Tegemist on testkeskkonnaga.",
+    "map": "Kaart",
+    "feed": "Postitused",
+    "profile": "Profiil",
+    "users": "Kasutajad",
+    "logout": "Logi välja"
+  },
+  "map": {
+    "controls": {
+      "displayedLocations": {
+        "private": "Privaatsed asukohad",
+        "public": "Avalikud asukohad"
+      }
+    },
+    "layers": {
+      "default": "BAASKAART",
+      "ORTOPHOTO": "ORTOFOTO",
+      "RELIEF": "RELJEEF",
+      "BASIC": "PÕHIKAART",
+      "HYBRID": "HÜBRIID"
+    },
+    "sidebar": {
+      "new": {
+        "title": "Lisa privaatsele kaardile",
+        "coordinates": "Koordinaadid",
+        "selectOnMap": "Määra kaardil",
+        "name": "Nimi",
+        "mainCategory": "Põhikategooria",
+        "subCategories": "Alamkategooriad",
+        "condition": "Seisukord",
+        "status": "Ligipääsetavus",
+        "additionalInfo": "Muu info",
+        "submit": "Lisa kaardile",
+        "detailsView": "Kuva peale lisamist detailvaade"
+      },
+      "filtering": {
+        "title": "Filtreeri asukohti",
+        "category": "Kategooriad",
+        "mustBeMainCategory": "Peab olema põhikategooria",
+        "selectAll": "Vali kõik",
+        "unselectAll": "Eemalda kõik valikud",
+        "condition": "Seisukord",
+        "status": "Ligipääsetavus",
+        "bookmark": "Meelespea",
+        "submit": "Rakenda filtrid"
+      },
+      "details": {
+        "private": "Privaatne",
+        "public": "Avalik",
+        "publish": "Avalikusta",
+        "viewPosts": "Vaata postitusi",
+        "addPost": "Lisa postitus",
+        "condition": "Seisukord",
+        "status": "Ligipääsetavus",
+        "additionalInfo": "Muu info",
+        "obliqueAerophoto": "Kaldaerofoto",
+        "landBoardLink": "Fotoladu",
+        "edit": "Muuda",
+        "delete": "Kustuta",
+        "publishPopup": {
+          "title": "Määra nõutud punktid",
+          "description": "Mitu punkti peab teistel kasutajatel olema, et seda asukohta näha?",
+          "submit": "Avalikusta asukoht",
+          "points": "Punktid"
+        },
+        "editing": {
+          "title": "Muuda olemasolevat asukoha",
+          "name": "Nimi",
+          "mainCategory": "Põhikategooria",
+          "subCategories": "Alamkategooriad",
+          "condition": "Seisukord",
+          "status": "Ligipääsetavus",
+          "additionalInfo": "Muu info",
+          "submit": "Salvesta muudatused",
+          "cancel": "Loobu"
+        }
+      }
+    }
+  },
+  "location": {
+    "category": {
+      "1": "Määramata",
+      "2": "Kontor",
+      "3": "Arhiiv",
+      "4": "Elumaja",
+      "5": "Hästi säilinud sisustus",
+      "6": "Kool",
+      "7": "Kõrgus",
+      "8": "Ladu",
+      "9": "Maa-alune",
+      "10": "Militaar",
+      "11": "Tööstus",
+      "12": "Varemed",
+      "13": "Varjend",
+      "14": "Muu"
+    },
+    "condition": {
+      "1": "Määramata",
+      "2": "Eluohtlik",
+      "3": "Ohtlik",
+      "4": "Keskpärane",
+      "5": "Hea",
+      "6": "Väga hea"
+    },
+    "status": {
+      "1": "Määramata",
+      "2": "Lammutatud",
+      "3": "Renoveeritud",
+      "4": "Vabalt ligipääsetav",
+      "5": "Raskesti ligipääsetav",
+      "6": "Suletud",
+      "7": "Korraldatakse ekskursioone",
+      "8": "Omaniku loal ligipääsetav"
+    },
+    "temporaryBookmark": {
+      "remember": "Jäta meelde",
+      "alreadyVisited": "Juba külastatud"
+    }
+  }
+}

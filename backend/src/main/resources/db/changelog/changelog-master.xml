@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+
+    <include file="/db/changelog/user-changelog.xml"/>
+    <include file="/db/changelog/location-changelog.xml"/>
+    <include file="/db/changelog/feed-changelog.xml"/>
+
+    <include file="/db/changelog/default-data-inserts/location-categories.xml"/>
+    <include file="/db/changelog/default-data-inserts/location-conditions.xml"/>
+    <include file="/db/changelog/default-data-inserts/location-statuses.xml"/>
+    <include file="/db/changelog/temporary-test-data/users.xml"/>
+    <include file="/db/changelog/temporary-test-data/locations.xml"/>
+
+</databaseChangeLog>

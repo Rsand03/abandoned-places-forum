@@ -1,0 +1,141 @@
+{
+  "welcome": "Welcome to our app",
+  "auth": {
+    "registerText": "Don't have an account? Register",
+    "loginText": "Already have an account? Log in",
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "submit": "Login",
+      "loginAsTestUser": "Login as test user"
+    },
+    "register": {
+      "title": "Register",
+      "username": "Username",
+      "password": "Password",
+      "email": "Email",
+      "submit": "Register"
+    }
+  },
+  "navMenu": {
+    "testEnvironment": "NB! This is a test environment.",
+    "map": "Map",
+    "feed": "Feed",
+    "profile": "Profile",
+    "users": "Users",
+    "logout": "Log out"
+  },
+  "map": {
+    "controls": {
+      "displayedLocations": {
+        "private": "Private locations",
+        "public": "Public locations"
+      }
+    },
+    "layers": {
+      "default": "DEFAULT MAP",
+      "ORTOPHOTO": "ORTOPHOTO",
+      "RELIEF": "RELIEF",
+      "BASIC": "BASE MAP",
+      "HYBRID": "HYBRID"
+    },
+    "sidebar": {
+      "new": {
+        "title": "Add to private map",
+        "coordinates": "Coordinates",
+        "selectOnMap": "Select on map",
+        "name": "Name",
+        "mainCategory": "Main category",
+        "subCategories": "Subcategories",
+        "condition": "Condition",
+        "status": "Accessibility",
+        "additionalInfo": "Other info",
+        "submit": "Add to map",
+        "detailsView": "Auto-select after adding"
+      },
+      "filtering": {
+        "title": "Filter locations",
+        "category": "Categories",
+        "mustBeMainCategory": "Must be main category",
+        "selectAll": "Select all",
+        "unselectAll": "Unselect all",
+        "condition": "Condition",
+        "status": "Accessibility",
+        "bookmark": "Bookmark",
+        "submit": "Apply filters"
+      },
+      "details": {
+        "private": "Private",
+        "public": "Public",
+        "publish": "Publish",
+        "viewPosts": "View posts",
+        "addPost": "Add a post",
+        "condition": "Condition",
+        "status": "Accessibility",
+        "additionalInfo": "Other info",
+        "obliqueAerophoto": "Oblique photo",
+        "landBoardLink": "Fotoladu",
+        "edit": "Edit",
+        "delete": "Delete",
+        "publishPopup": {
+          "title": "Set required points",
+          "description": "How many points should other users have to see this location?",
+          "submit": "Publish location",
+          "points": "Points"
+        },
+        "editing": {
+          "title": "Edit existing location",
+          "name": "Name",
+          "mainCategory": "Main category",
+          "subCategories": "Subcategories",
+          "condition": "Condition",
+          "status": "Accessibility",
+          "additionalInfo": "Other info",
+          "submit": "Save changes",
+          "cancel": "Cancel"
+        }
+      }
+    }
+  },
+  "location": {
+    "category": {
+      "1": "Not specified",
+      "2": "Office",
+      "3": "Archive",
+      "4": "Residential building",
+      "5": "Well-preserved interior",
+      "6": "School",
+      "7": "Height",
+      "8": "Warehouse",
+      "9": "Underground",
+      "10": "Military",
+      "11": "Industry",
+      "12": "Ruins",
+      "13": "Bomb shelter",
+      "14": "Other"
+    },
+    "condition": {
+      "1": "Not specified",
+      "2": "Life-threatening",
+      "3": "Dangerous",
+      "4": "Mediocre",
+      "5": "Good",
+      "6": "Very good"
+    },
+    "status": {
+      "1": "Not specified",
+      "2": "Demolished",
+      "3": "Renovated",
+      "4": "Freely accessible",
+      "5": "Difficult to access",
+      "6": "Closed",
+      "7": "Guided tours available",
+      "8": "Accessible with owner's permission"
+    },
+    "temporaryBookmark": {
+      "remember": "Remember",
+      "alreadyVisited": "Already visited"
+    }
+  }
+}

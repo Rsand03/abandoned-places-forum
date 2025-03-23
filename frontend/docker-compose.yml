@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  web-frontend:
+    image: tiim32/frontend:latest
+    container_name: web-frontend
+    restart: always
+    ports:
+      - "8081:5173"
+    environment:
+      - VITE_API_URL=http://tiim32.zapto.org
